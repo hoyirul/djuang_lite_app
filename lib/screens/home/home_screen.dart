@@ -1,8 +1,10 @@
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
+import 'package:djuang_lite_app/screens/auth/login_screen.dart';
 import 'package:djuang_lite_app/screens/components/button_component.dart';
 import 'package:djuang_lite_app/screens/components/circle_component.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -68,13 +70,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
 
-                const Positioned(
+                Positioned(
                   top: 80,
                   right: 25,
                   child: ButtonComponent(
                     button: TextButton(
-                      onPressed: null,
-                      child: Text('Logout', style: TextStyle(
+                      onPressed: () {
+                        Get.offAll(const LoginScreen());
+                      },
+                      child: const Text('Logout', style: TextStyle(
                         fontFamily: FontPicker.semibold,
                         fontSize: 12,
                         color: ColorPicker.primary
