@@ -67,6 +67,9 @@ class RegisterScreen extends StatelessWidget {
       
               const SizedBox(height: 25,),
               const ButtonComponent(
+                height: 50,
+                width: double.infinity,
+                colors: ColorPicker.primary,
                 button: TextButton(onPressed: null, child: Text('Sign up', style: TextStyle(
                   fontSize: 14,
                   fontFamily: FontPicker.bold,

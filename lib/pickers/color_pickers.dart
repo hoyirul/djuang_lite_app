@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class ColorPicker{
   static const primary = Color(0xffFF4165);
+  static const shape = Color(0xffFF4A6D);
   static const orange = Color(0xffFF9800);
   static const green = Color(0xff7ED321);
   static const greyLight = Color(0xffdddddd);

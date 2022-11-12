@@ -1,19 +1,20 @@
-import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:flutter/material.dart';
 
 class ButtonComponent extends StatelessWidget {
+  final double height, width;
+  final Color colors;
   final TextButton button;
-  const ButtonComponent({super.key, required this.button});
+  const ButtonComponent({super.key, required this.button, required this.colors, required this.height, required this.width});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       child: Container(
-        height: 50,
-        width: double.infinity,
+        height: height,
+        width: width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
-          color: ColorPicker.primary
+          color: colors
         ),
         child: button,
       ),
