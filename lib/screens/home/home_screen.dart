@@ -3,7 +3,11 @@ import 'package:djuang_lite_app/pickers/font_pickers.dart';
 import 'package:djuang_lite_app/screens/auth/login_screen.dart';
 import 'package:djuang_lite_app/screens/components/button_component.dart';
 import 'package:djuang_lite_app/screens/components/circle_component.dart';
+import 'package:djuang_lite_app/screens/components/home_feature_component.dart';
+import 'package:djuang_lite_app/screens/components/schedule_component.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Stack(
               children: [
@@ -95,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   left: 25,
                   right: 25,
                   child: Container(
-                    padding: const EdgeInsets.all(0),
+                    padding: const EdgeInsets.only(top: 15, bottom: 15, left: 25, right: 25),
                     height: 100,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
@@ -109,10 +114,123 @@ class _HomeScreenState extends State<HomeScreen> {
                         )
                       ]
                     ),
+
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {
+                              print('Booking');
+                            },
+                            child: const HomeFeatureComponent(icons: 'assets/icons/booking.svg', title: 'Booking')
+                          )
+                        ),
+
+                        const SizedBox(width: 20,),
+
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {
+                              print('Transaction');
+                            },
+                            child: const HomeFeatureComponent(icons: 'assets/icons/transactions.svg', title: 'Transactions')
+                          )
+                        ),
+
+                        const SizedBox(width: 20,),
+
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {
+                              print('Account');
+                            },
+                            child: const HomeFeatureComponent(icons: 'assets/icons/accounts.svg', title: 'Account')
+                          )
+                        ),
+
+                      ],
+                    ),
                   ),
                 )
-
               ],
+            ),
+
+            const SizedBox(height: 10,),
+
+            Padding(
+              padding: const EdgeInsets.only(left: 25, right: 25),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text('Schedules', style: TextStyle(
+                      fontFamily: FontPicker.bold,
+                      color: ColorPicker.dark,
+                      fontSize: 23
+                    ),)
+                  ),
+
+                  const SizedBox(height: 10,),
+
+                  Row(
+                    children: const [
+                      ScheduleComponent(),
+
+                      SizedBox(width: 15,),
+
+                      ScheduleComponent(),
+                    ],
+                  ),
+
+                  const SizedBox(height: 20,),
+
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text('Histories', style: TextStyle(
+                      fontFamily: FontPicker.bold,
+                      color: ColorPicker.dark,
+                      fontSize: 23
+                    ),)
+                  ),
+
+                  const SizedBox(height: 10,),
+
+                  ListView.builder(
+                    padding: const EdgeInsets.all(0),
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemCount: 8,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: ColorPicker.white,
+                          boxShadow: const [
+                            BoxShadow(
+                              color: ColorPicker.greyLight,
+                              offset: Offset(0, 1),
+                              blurRadius: 1
+                            )
+                          ]
+                        ),
+                        child: ListTile(
+                          title: Text('Histories ${index + 1}', style: const TextStyle(
+                            fontFamily: FontPicker.medium
+                          ),),
+                          subtitle: const Text('Lorem ipsum dolor', style: TextStyle(
+                            fontFamily: FontPicker.regular,
+                            fontSize: 12
+                          ),),
+                          trailing: (index % 2 == 1 ) ? const Icon(Icons.check_circle_outline, color: ColorPicker.green,) : const Icon(Icons.remove_circle_outline, color: ColorPicker.primary,)
+                        ),
+                      );
+                    },
+                  )
+                ],
+              ),
             )
           ],
         ),
