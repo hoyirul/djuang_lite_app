@@ -15,7 +15,7 @@ class BookingScreen extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(left: 30, right: 30),
+          padding: const EdgeInsets.only(left: 25, right: 25),
           child: Column(
             children: [
               const SizedBox(height: 50,),

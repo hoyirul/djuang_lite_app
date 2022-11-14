@@ -6,6 +6,7 @@ import 'package:djuang_lite_app/screens/components/button_component.dart';
 import 'package:djuang_lite_app/screens/components/circle_component.dart';
 import 'package:djuang_lite_app/screens/components/home_feature_component.dart';
 import 'package:djuang_lite_app/screens/components/schedule_component.dart';
+import 'package:djuang_lite_app/screens/transaction/transaction_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -130,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Expanded(
                           child: InkWell(
                             onTap: () {
-                              print('Transaction');
+                              Get.off(const TransactionScreen());
                             },
                             child: const HomeFeatureComponent(icons: 'assets/icons/transactions.svg', title: 'Transactions')
                           )
