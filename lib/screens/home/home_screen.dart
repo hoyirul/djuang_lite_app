@@ -1,6 +1,7 @@
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
 import 'package:djuang_lite_app/screens/auth/login_screen.dart';
+import 'package:djuang_lite_app/screens/booking/booking_screen.dart';
 import 'package:djuang_lite_app/screens/components/button_component.dart';
 import 'package:djuang_lite_app/screens/components/circle_component.dart';
 import 'package:djuang_lite_app/screens/components/home_feature_component.dart';
@@ -118,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Expanded(
                           child: InkWell(
                             onTap: () {
-                              print('Booking');
+                              Get.offAll(const BookingScreen());
                             },
                             child: const HomeFeatureComponent(icons: 'assets/icons/booking.svg', title: 'Booking')
                           )

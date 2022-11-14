@@ -19,12 +19,12 @@ class HomeFeatureComponent extends StatelessWidget {
           Center(
             child: SvgPicture.asset(icons),
           ),
-          const Center(
+          Center(
             child: Text(
-              'Booking',
-              style: TextStyle(
+              title,
+              style: const TextStyle(
                   color: ColorPicker.grey,
-                  fontSize: 12,
+                  fontSize: 10,
                   fontFamily: FontPicker.medium),
             ),
           )
