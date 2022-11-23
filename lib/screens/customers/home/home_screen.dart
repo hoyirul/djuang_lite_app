@@ -1,12 +1,12 @@
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
-import 'package:djuang_lite_app/screens/auth/login_screen.dart';
-import 'package:djuang_lite_app/screens/booking/booking_screen.dart';
+import 'package:djuang_lite_app/screens/customers/auth/login_screen.dart';
+import 'package:djuang_lite_app/screens/customers/booking/booking_screen.dart';
 import 'package:djuang_lite_app/screens/components/button_component.dart';
 import 'package:djuang_lite_app/screens/components/circle_component.dart';
 import 'package:djuang_lite_app/screens/components/home_feature_component.dart';
 import 'package:djuang_lite_app/screens/components/schedule_component.dart';
-import 'package:djuang_lite_app/screens/transaction/transaction_screen.dart';
+import 'package:djuang_lite_app/screens/customers/transaction/transaction_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
