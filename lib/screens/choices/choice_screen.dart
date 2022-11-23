@@ -1,11 +1,7 @@
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
 import 'package:djuang_lite_app/screens/customers/auth/login_screen.dart';
-import 'package:djuang_lite_app/screens/customers/auth/register_screen.dart';
 import 'package:djuang_lite_app/screens/components/button_component.dart';
-import 'package:djuang_lite_app/screens/components/input_component.dart';
-import 'package:djuang_lite_app/screens/components/label_component.dart';
-import 'package:djuang_lite_app/screens/customers/home/home_screen.dart';
 import 'package:djuang_lite_app/screens/drivers/auth/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,10 +15,10 @@ class ChoiceScreen extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(50),
+          padding: const EdgeInsets.only(top: 50, left: 25, right: 25, bottom: 50),
           child: Column(
             children: [
-              const SizedBox(height: 80,),
+              const SizedBox(height: 50,),
               Container(
                 padding: const EdgeInsets.only(top: 25, left: 25, right: 25, bottom: 10),
                 height: 250,

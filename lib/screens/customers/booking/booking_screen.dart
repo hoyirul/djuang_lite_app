@@ -18,7 +18,7 @@ class BookingScreen extends StatelessWidget {
           padding: const EdgeInsets.only(left: 25, right: 25),
           child: Column(
             children: [
-              const SizedBox(height: 50,),
+              const SizedBox(height: 40,),
 
               InkWell(
                 onTap: () {
@@ -93,7 +93,8 @@ class BookingScreen extends StatelessWidget {
                 colors: ColorPicker.primary,
                 height: 60,
                 width: double.infinity,
-              )
+              ),
+              const SizedBox(height: 20,),
             ],
           ),
         ),

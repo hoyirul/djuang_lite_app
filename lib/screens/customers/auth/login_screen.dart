@@ -18,10 +18,9 @@ class LoginCustomerScreen extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(50),
+          padding: const EdgeInsets.only(top: 50, left: 25, right: 25, bottom: 50),
           child: Column(
             children: [
-              const SizedBox(height: 15,),
 
               InkWell(
                 onTap: () {
