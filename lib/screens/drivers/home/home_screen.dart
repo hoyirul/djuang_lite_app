@@ -1,23 +1,23 @@
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
-import 'package:djuang_lite_app/screens/customers/auth/login_screen.dart';
-import 'package:djuang_lite_app/screens/customers/booking/booking_screen.dart';
+import 'package:djuang_lite_app/screens/drivers/auth/login_screen.dart';
 import 'package:djuang_lite_app/screens/components/button_component.dart';
 import 'package:djuang_lite_app/screens/components/circle_component.dart';
 import 'package:djuang_lite_app/screens/components/home_feature_component.dart';
 import 'package:djuang_lite_app/screens/components/schedule_component.dart';
-import 'package:djuang_lite_app/screens/customers/transaction/transaction_screen.dart';
+import 'package:djuang_lite_app/screens/drivers/schedules/schedule_screen.dart';
+import 'package:djuang_lite_app/screens/drivers/transaction/transaction_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeCustomerScreen extends StatefulWidget {
-  const HomeCustomerScreen({super.key});
+class HomeDriverScreen extends StatefulWidget {
+  const HomeDriverScreen({super.key});
 
   @override
-  State<HomeCustomerScreen> createState() => _HomeCustomerScreenState();
+  State<HomeDriverScreen> createState() => _HomeDriverScreenState();
 }
 
-class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
+class _HomeDriverScreenState extends State<HomeDriverScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,15 +60,15 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
-                      Text('Hi, Smith Adam', style: TextStyle(
-                        fontFamily: FontPicker.semibold,
-                        fontSize: 18,
+                      Text('Hi, John Lenon', style: TextStyle(
+                        fontFamily: FontPicker.bold,
+                        fontSize: 21,
                         color: ColorPicker.white
                       ),),
 
                       Text('Lorem ipsum dolor jamet ansu', style: TextStyle(
                         fontFamily: FontPicker.regular,
-                        fontSize: 11,
+                        fontSize: 13,
                         color: ColorPicker.white
                       ),),
                     ],
@@ -81,7 +81,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                   child: ButtonComponent(
                     button: TextButton(
                       onPressed: () {
-                        Get.offAll(const LoginCustomerScreen());
+                        Get.offAll(const LoginDriverScreen());
                       },
                       child: const Text('Logout', style: TextStyle(
                         fontFamily: FontPicker.semibold,
@@ -120,9 +120,9 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                         Expanded(
                           child: InkWell(
                             onTap: () {
-                              Get.offAll(const BookingScreen());
+                              Get.offAll(const ScheduleScreen());
                             },
-                            child: const HomeFeatureComponent(icons: 'assets/icons/booking.svg', title: 'Booking')
+                            child: const HomeFeatureComponent(icons: 'assets/icons/booking.svg', title: 'Schedules')
                           )
                         ),
 
@@ -166,9 +166,9 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Text('Schedules', style: TextStyle(
-                      fontFamily: FontPicker.semibold,
+                      fontFamily: FontPicker.bold,
                       color: ColorPicker.dark,
-                      fontSize: 18
+                      fontSize: 23
                     ),)
                   ),
 
@@ -189,9 +189,9 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Text('Histories', style: TextStyle(
-                      fontFamily: FontPicker.semibold,
+                      fontFamily: FontPicker.bold,
                       color: ColorPicker.dark,
-                      fontSize: 18
+                      fontSize: 23
                     ),)
                   ),
 

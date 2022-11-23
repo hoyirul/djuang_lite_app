@@ -22,7 +22,7 @@ class BookingScreen extends StatelessWidget {
 
               InkWell(
                 onTap: () {
-                  Get.off(const HomeScreen());
+                  Get.off(const HomeCustomerScreen());
                 },
                 child: Row(
                   children: const [

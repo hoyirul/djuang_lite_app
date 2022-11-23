@@ -1,6 +1,6 @@
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
-import 'package:djuang_lite_app/screens/customers/auth/login_screen.dart';
+import 'package:djuang_lite_app/screens/drivers/auth/login_screen.dart';
 import 'package:djuang_lite_app/screens/components/button_component.dart';
 import 'package:djuang_lite_app/screens/components/input_component.dart';
 import 'package:djuang_lite_app/screens/components/label_component.dart';
@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class RegisterCustomerScreen extends StatelessWidget {
-  const RegisterCustomerScreen({super.key});
+class RegisterDriverScreen extends StatelessWidget {
+  const RegisterDriverScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +70,7 @@ class RegisterCustomerScreen extends StatelessWidget {
                 height: 50,
                 width: double.infinity,
                 colors: ColorPicker.primary,
-                button: TextButton(onPressed: null, child: Text('Sign up', style: TextStyle(
+                button: TextButton(onPressed: null, child: Text('Sign up as Driver', style: TextStyle(
                   fontSize: 14,
                   fontFamily: FontPicker.bold,
                   color: ColorPicker.white
@@ -85,7 +85,7 @@ class RegisterCustomerScreen extends StatelessWidget {
                   ),),
                   InkWell(
                     onTap: () {
-                      Get.offAll(const LoginCustomerScreen());
+                      Get.offAll(const LoginDriverScreen());
                     },
                     child: const Text('Sign in', style: TextStyle(
                       color: ColorPicker.primary,

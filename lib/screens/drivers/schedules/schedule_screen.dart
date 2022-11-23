@@ -1,11 +1,11 @@
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
-import 'package:djuang_lite_app/screens/customers/home/home_screen.dart';
+import 'package:djuang_lite_app/screens/drivers/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class TransactionScreen extends StatelessWidget {
-  const TransactionScreen({super.key});
+class ScheduleScreen extends StatelessWidget {
+  const ScheduleScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class TransactionScreen extends StatelessWidget {
 
               InkWell(
                 onTap: () {
-                  Get.off(const HomeCustomerScreen());
+                  Get.off(const HomeDriverScreen());
                 },
                 child: Row(
                   children: const [
@@ -36,7 +36,7 @@ class TransactionScreen extends StatelessWidget {
               ),
 
               const Text(
-                'List Transactions',
+                'List Schedules',
                 style: TextStyle(fontFamily: FontPicker.bold, fontSize: 25),
               ),
 
@@ -75,7 +75,7 @@ class TransactionScreen extends StatelessWidget {
                         ]),
                     child: ListTile(
                         title: Text(
-                          'TX-0000${index + 1}',
+                          'Monday ${index + 1}',
                           style: const TextStyle(fontFamily: FontPicker.medium),
                         ),
                         subtitle: const Text(
@@ -85,12 +85,12 @@ class TransactionScreen extends StatelessWidget {
                         ),
                         trailing: Wrap(
                           children: const [
-                            Text('Success ', style: TextStyle(
+                            Text('Today ', style: TextStyle(
                               color: ColorPicker.grey,
                             ),),
                             Icon(
-                                Icons.check_circle_outline,
-                                color: ColorPicker.green,
+                                Icons.warning_amber_rounded,
+                                color: ColorPicker.orange,
                                 size: 18,
                               )
                           ],

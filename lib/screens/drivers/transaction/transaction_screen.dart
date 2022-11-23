@@ -1,6 +1,6 @@
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
-import 'package:djuang_lite_app/screens/customers/home/home_screen.dart';
+import 'package:djuang_lite_app/screens/drivers/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,7 +21,7 @@ class TransactionScreen extends StatelessWidget {
 
               InkWell(
                 onTap: () {
-                  Get.off(const HomeCustomerScreen());
+                  Get.off(const HomeDriverScreen());
                 },
                 child: Row(
                   children: const [

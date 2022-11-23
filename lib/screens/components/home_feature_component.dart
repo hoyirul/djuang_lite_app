@@ -24,7 +24,7 @@ class HomeFeatureComponent extends StatelessWidget {
               title,
               style: const TextStyle(
                   color: ColorPicker.grey,
-                  fontSize: 10,
+                  fontSize: 9,
                   fontFamily: FontPicker.medium),
             ),
           )

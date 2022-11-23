@@ -1,5 +1,6 @@
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
+import 'package:djuang_lite_app/screens/choices/choice_screen.dart';
 import 'package:djuang_lite_app/screens/customers/auth/register_screen.dart';
 import 'package:djuang_lite_app/screens/components/button_component.dart';
 import 'package:djuang_lite_app/screens/components/input_component.dart';
@@ -9,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class LoginCustomerScreen extends StatelessWidget {
+  const LoginCustomerScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,19 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 15,),
+
+              InkWell(
+                onTap: () {
+                  Get.off(const ChoiceScreen());
+                },
+                child: Row(
+                  children: const [
+                    Icon(Icons.arrow_back_ios),
+                    Text('Back'),
+                  ],
+                ),
+              ),
+
               Container(
                 padding: const EdgeInsets.only(top: 25, left: 25, right: 25, bottom: 10),
                 height: 250,
@@ -65,7 +79,7 @@ class LoginScreen extends StatelessWidget {
                 colors: ColorPicker.primary,
                 button: TextButton(
                   onPressed: () {
-                    Get.offAll(const HomeScreen());
+                    Get.offAll(const HomeCustomerScreen());
                   }, 
                   child: const Text('Sign in', style: TextStyle(
                     fontSize: 14,
@@ -84,7 +98,7 @@ class LoginScreen extends StatelessWidget {
                   ),),
                   InkWell(
                     onTap: () {
-                      Get.offAll(const RegisterScreen());
+                      Get.offAll(const RegisterCustomerScreen());
                     },
                     child: const Text('Sign up', style: TextStyle(
                       color: ColorPicker.primary,

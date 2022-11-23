@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
-import 'package:djuang_lite_app/screens/customers/auth/login_screen.dart';
+import 'package:djuang_lite_app/screens/choices/choice_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), () => Get.off(const LoginScreen()));
+    Timer(const Duration(seconds: 3), () => Get.off(const ChoiceScreen()));
   }
 
   @override
