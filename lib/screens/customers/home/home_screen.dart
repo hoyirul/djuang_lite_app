@@ -1,5 +1,6 @@
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
+import 'package:djuang_lite_app/screens/customers/account/account_screen.dart';
 import 'package:djuang_lite_app/screens/customers/auth/login_screen.dart';
 import 'package:djuang_lite_app/screens/customers/booking/booking_screen.dart';
 import 'package:djuang_lite_app/screens/components/button_component.dart';
@@ -142,7 +143,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                         Expanded(
                           child: InkWell(
                             onTap: () {
-                              print('Account');
+                              Get.off(const AccountCustomerScreen());
                             },
                             child: const HomeFeatureComponent(icons: 'assets/icons/accounts.svg', title: 'Account')
                           )
