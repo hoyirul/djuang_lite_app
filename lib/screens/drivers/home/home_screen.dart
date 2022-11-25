@@ -1,5 +1,6 @@
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
+import 'package:djuang_lite_app/screens/drivers/account/account_screen.dart';
 import 'package:djuang_lite_app/screens/drivers/auth/login_screen.dart';
 import 'package:djuang_lite_app/screens/components/button_component.dart';
 import 'package:djuang_lite_app/screens/components/circle_component.dart';
@@ -142,7 +143,7 @@ class _HomeDriverScreenState extends State<HomeDriverScreen> {
                         Expanded(
                           child: InkWell(
                             onTap: () {
-                              print('Account');
+                              Get.off(const AccountDriverScreen());
                             },
                             child: const HomeFeatureComponent(icons: 'assets/icons/accounts.svg', title: 'Account')
                           )
