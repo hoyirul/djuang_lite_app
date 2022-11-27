@@ -1,3 +1,4 @@
+import 'package:djuang_lite_app/controllers/auth/auth_controller.dart';
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
 import 'package:djuang_lite_app/screens/choices/choice_screen.dart';
@@ -5,14 +6,19 @@ import 'package:djuang_lite_app/screens/customers/auth/register_screen.dart';
 import 'package:djuang_lite_app/screens/components/button_component.dart';
 import 'package:djuang_lite_app/screens/components/input_component.dart';
 import 'package:djuang_lite_app/screens/components/label_component.dart';
-import 'package:djuang_lite_app/screens/customers/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class LoginCustomerScreen extends StatelessWidget {
+class LoginCustomerScreen extends StatefulWidget {
   const LoginCustomerScreen({super.key});
 
+  @override
+  State<LoginCustomerScreen> createState() => _LoginCustomerScreenState();
+}
+
+class _LoginCustomerScreenState extends State<LoginCustomerScreen> {
+  final AuthController authController = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,11 +71,11 @@ class LoginCustomerScreen extends StatelessWidget {
             
               const SizedBox(height: 20,),
               const LabelComponent(label: 'Email : '),
-              const InputComponent(hintText: 'Enter your email', obscuredText: false, colors: ColorPicker.greyAccent,),
+              InputComponent(textEditingController: authController.emailController, hintText: 'Enter your email', obscuredText: false, colors: ColorPicker.greyAccent,),
       
               const SizedBox(height: 15,),
               const LabelComponent(label: 'Password : '),
-              const InputComponent(hintText: 'Enter your password', obscuredText: true, colors: ColorPicker.greyAccent,),
+              InputComponent(textEditingController: authController.passwordController, hintText: 'Enter your password', obscuredText: true, colors: ColorPicker.greyAccent,),
 
               const SizedBox(height: 25,),
               ButtonComponent(
@@ -78,7 +84,7 @@ class LoginCustomerScreen extends StatelessWidget {
                 colors: ColorPicker.primary,
                 button: TextButton(
                   onPressed: () {
-                    Get.offAll(const HomeCustomerScreen());
+                    authController.authLoginCustomer('customer');
                   }, 
                   child: const Text('Sign in', style: TextStyle(
                     fontSize: 14,

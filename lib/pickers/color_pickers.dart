@@ -12,4 +12,6 @@ class ColorPicker{
   static const dark = Color(0xff2F2F2F);
   static const white = Color(0xffffffff);
   static const greyAccent = Color(0xffF4F4F4);
+  static const warning = Color(0xffFFA26C);
+  static const danger = Color.fromARGB(255, 255, 50, 88);
 }

@@ -6,7 +6,8 @@ class InputComponent extends StatelessWidget {
   final String hintText;
   final bool obscuredText;
   final Color colors;
-  const InputComponent({super.key, required this.hintText, required this.obscuredText, required this.colors});
+  final TextEditingController? textEditingController;
+  const InputComponent({super.key, this.textEditingController, required this.hintText, required this.obscuredText, required this.colors});
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +28,7 @@ class InputComponent extends StatelessWidget {
           ]
         ),
         child: TextFormField(
+          controller: textEditingController,
           obscureText: obscuredText,
           decoration: InputDecoration(
             hintText: hintText,

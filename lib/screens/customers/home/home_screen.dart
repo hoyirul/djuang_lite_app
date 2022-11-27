@@ -1,3 +1,4 @@
+import 'package:djuang_lite_app/controllers/auth/auth_controller.dart';
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
 import 'package:djuang_lite_app/screens/customers/account/account_screen.dart';
@@ -19,6 +20,8 @@ class HomeCustomerScreen extends StatefulWidget {
 }
 
 class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
+  AuthController authController = Get.put(AuthController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +85,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                   child: ButtonComponent(
                     button: TextButton(
                       onPressed: () {
-                        Get.offAll(const LoginCustomerScreen());
+                        authController.logout();
                       },
                       child: const Text('Logout', style: TextStyle(
                         fontFamily: FontPicker.semibold,
