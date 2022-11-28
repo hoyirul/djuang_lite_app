@@ -1,4 +1,5 @@
 import 'package:djuang_lite_app/controllers/auth/auth_controller.dart';
+import 'package:djuang_lite_app/controllers/profile_controller.dart';
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
 import 'package:djuang_lite_app/screens/customers/account/account_screen.dart';
@@ -21,6 +22,7 @@ class HomeCustomerScreen extends StatefulWidget {
 
 class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
   AuthController authController = Get.put(AuthController());
+  ProfileController profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -63,18 +65,28 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                   top: 80,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text('Hi, Smith Adam', style: TextStyle(
-                        fontFamily: FontPicker.semibold,
-                        fontSize: 18,
-                        color: ColorPicker.white
-                      ),),
+                    children: [
+                      FutureBuilder(
+                        future: profileController.getName(),
+                        builder: (context, snapshot) {
+                          return Text('Hi, ${snapshot.data}', style: const TextStyle(
+                          fontFamily: FontPicker.semibold,
+                          fontSize: 16,
+                          color: ColorPicker.white
+                        ),);
+                        },
+                      ),
 
-                      Text('Lorem ipsum dolor jamet ansu', style: TextStyle(
-                        fontFamily: FontPicker.regular,
-                        fontSize: 11,
-                        color: ColorPicker.white
-                      ),),
+                      FutureBuilder(
+                        future: profileController.getEmail(),
+                        builder: (context, snapshot) {
+                          return Text('${snapshot.data}', style: const TextStyle(
+                          fontFamily: FontPicker.regular,
+                          fontSize: 11,
+                          color: ColorPicker.white
+                        ),);
+                        },
+                      ),
                     ],
                   ),
                 ),

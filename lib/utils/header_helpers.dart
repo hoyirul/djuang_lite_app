@@ -1,5 +1,5 @@
 class HeaderHelper{
-  headersUnlogged(tokenType, accessToken) {
+  headersUnlogged() {
     final Map<String, String> headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json'

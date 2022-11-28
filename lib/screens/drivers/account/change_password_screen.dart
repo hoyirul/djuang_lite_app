@@ -7,8 +7,8 @@ import 'package:djuang_lite_app/screens/drivers/account/account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ChangeCustomerPasswordScreen extends StatelessWidget {
-  const ChangeCustomerPasswordScreen({super.key});
+class ChangeDriverPasswordScreen extends StatelessWidget {
+  const ChangeDriverPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -47,7 +47,7 @@ class AccountDriverScreen extends StatelessWidget {
               const SizedBox(height: 10,),
               InkWell(
                 onTap: () {
-                  Get.off(const ChangeCustomerProfileScreen());
+                  Get.off(const ChangeDriverProfileScreen());
                 },
                 child: const SettingComponentFeatures(
                   title: 'Change Profile', 
@@ -57,7 +57,7 @@ class AccountDriverScreen extends StatelessWidget {
 
               InkWell(
                 onTap: () {
-                  Get.off(const ChangeCustomerPasswordScreen());
+                  Get.off(const ChangeDriverPasswordScreen());
                 },
                 child: const SettingComponentFeatures(
                   title: 'Change Password', 

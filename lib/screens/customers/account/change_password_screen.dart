@@ -1,14 +1,23 @@
+import 'package:djuang_lite_app/controllers/profile_controller.dart';
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
 import 'package:djuang_lite_app/screens/components/button_component.dart';
+import 'package:djuang_lite_app/screens/components/header_account_component.dart';
 import 'package:djuang_lite_app/screens/components/input_component.dart';
 import 'package:djuang_lite_app/screens/components/label_component.dart';
 import 'package:djuang_lite_app/screens/customers/account/account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ChangeCustomerPasswordScreen extends StatelessWidget {
+class ChangeCustomerPasswordScreen extends StatefulWidget {
   const ChangeCustomerPasswordScreen({super.key});
+
+  @override
+  State<ChangeCustomerPasswordScreen> createState() => _ChangeCustomerPasswordScreenState();
+}
+
+class _ChangeCustomerPasswordScreenState extends State<ChangeCustomerPasswordScreen> {
+  ProfileController profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -18,44 +27,18 @@ class ChangeCustomerPasswordScreen extends StatelessWidget {
           padding: const EdgeInsets.only(left: 25, right: 25, bottom: 50, top: 50),
           child: Column(
             children: [
-              InkWell(
-                onTap: () {
-                  Get.off(const AccountCustomerScreen());
-                },
-                child: Row(
-                  children: const [
-                    Icon(Icons.arrow_back_ios),
-                    Text('Back'), 
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: 30,),
-              Center(
-                child: Container(
-                  height: 150,
-                  width: 150,
-                  decoration: const BoxDecoration(
-                    color: ColorPicker.greyLight,
-                    shape: BoxShape.circle
+              HeaderAccountComponent(
+                inkWell: InkWell(
+                    onTap: () {
+                    Get.off(const AccountCustomerScreen());
+                  },
+                  child: Row(
+                    children: const [
+                      Icon(Icons.arrow_back_ios),
+                      Text('Back'), 
+                    ],
                   ),
-                ),
-              ),
-
-              const SizedBox(height: 10,),
-              const Center(
-                child: Text('Elvira Sania Mufida', style: TextStyle(
-                  fontFamily: FontPicker.semibold,
-                  fontSize: 18
-                ),),
-              ),
-
-              const SizedBox(height: 5,),
-              const Center(
-                child: Text('Jl Bunga Andong Timur 19, Malang', style: TextStyle(
-                  fontFamily: FontPicker.regular,
-                  fontSize: 14
-                ),),
+                )
               ),
 
               const SizedBox(height: 40,),
@@ -70,15 +53,15 @@ class ChangeCustomerPasswordScreen extends StatelessWidget {
 
               const SizedBox(height: 20,),
               const LabelComponent(label: 'Old Password : '),
-              const InputComponent(hintText: 'Enter your old password', obscuredText: true, colors: ColorPicker.greyAccent,),
+              InputComponent(textEditingController: profileController.oldPasswordController, hintText: 'Enter your old password', obscuredText: true, colors: ColorPicker.greyAccent,),
 
               const SizedBox(height: 10,),
               const LabelComponent(label: 'New Password : '),
-              const InputComponent(hintText: 'Enter your new password', obscuredText: true, colors: ColorPicker.greyAccent,),
+              InputComponent(textEditingController: profileController.passwordController, hintText: 'Enter your new password', obscuredText: true, colors: ColorPicker.greyAccent,),
 
               const SizedBox(height: 10,),
               const LabelComponent(label: 'Confirm Password : '),
-              const InputComponent(hintText: 'Enter your confirm password', obscuredText: true, colors: ColorPicker.greyAccent,),
+              InputComponent(textEditingController: profileController.passwordConfirmationController, hintText: 'Enter your confirm password', obscuredText: true, colors: ColorPicker.greyAccent,),
 
               const SizedBox(height: 25,),
               ButtonComponent(
@@ -87,7 +70,7 @@ class ChangeCustomerPasswordScreen extends StatelessWidget {
                 colors: ColorPicker.primary,
                 button: TextButton(
                   onPressed: () {
-                    Get.offAll(const AccountCustomerScreen());
+                    profileController.updatePassword('customer');
                   }, 
                   child: const Text('Update', style: TextStyle(
                     fontSize: 14,

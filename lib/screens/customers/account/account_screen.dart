@@ -1,3 +1,4 @@
+import 'package:djuang_lite_app/controllers/auth/auth_controller.dart';
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
 import 'package:djuang_lite_app/screens/components/button_component.dart';
@@ -9,8 +10,15 @@ import 'package:djuang_lite_app/screens/customers/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AccountCustomerScreen extends StatelessWidget {
+class AccountCustomerScreen extends StatefulWidget {
   const AccountCustomerScreen({super.key});
+
+  @override
+  State<AccountCustomerScreen> createState() => _AccountCustomerScreenState();
+}
+
+class _AccountCustomerScreenState extends State<AccountCustomerScreen> {
+  AuthController authController = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +87,7 @@ class AccountCustomerScreen extends StatelessWidget {
               ButtonComponent(
                 button: TextButton(
                   onPressed: () {
-                    print('Logout');
+                    authController.logout();
                   },
                   child: const Text('Logout', style: TextStyle(
                     color: ColorPicker.white,

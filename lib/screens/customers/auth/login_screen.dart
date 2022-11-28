@@ -84,7 +84,7 @@ class _LoginCustomerScreenState extends State<LoginCustomerScreen> {
                 colors: ColorPicker.primary,
                 button: TextButton(
                   onPressed: () {
-                    authController.authLoginCustomer('customer');
+                    authController.authLogin('customer');
                   }, 
                   child: const Text('Sign in', style: TextStyle(
                     fontSize: 14,

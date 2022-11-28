@@ -3,8 +3,11 @@ import 'dart:async';
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
 import 'package:djuang_lite_app/screens/choices/choice_screen.dart';
+import 'package:djuang_lite_app/screens/customers/home/home_screen.dart';
+import 'package:djuang_lite_app/screens/drivers/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,11 +17,33 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), () => Get.off(const ChoiceScreen()));
+    redirectScreen();
+  }
+
+  void redirectScreen() async {
+    final prefs = await _prefs;
+    if(prefs.getString('access_token') == null){
+      Timer(const Duration(seconds: 3), () => Get.off(const ChoiceScreen()));
+    }else{
+      switch(prefs.getInt('role_id')){
+        case 3:
+          Timer(const Duration(seconds: 3), () => Get.off(const HomeDriverScreen()));
+          break;
+        case 4:
+          Timer(const Duration(seconds: 3), () => Get.off(const HomeCustomerScreen()));
+          break;
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
