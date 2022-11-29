@@ -177,11 +177,11 @@ class _HomeDriverScreenState extends State<HomeDriverScreen> {
 
                   Row(
                     children: const [
-                      ScheduleComponent(),
+                      ScheduleComponent(time: '', pickup: '', destination: '',),
 
                       SizedBox(width: 15,),
 
-                      ScheduleComponent(),
+                      ScheduleComponent(time: '', pickup: '', destination: '',),
                     ],
                   ),
 

@@ -1,9 +1,9 @@
 import 'package:djuang_lite_app/controllers/auth/auth_controller.dart';
+import 'package:djuang_lite_app/controllers/customers/schedule_controller.dart';
 import 'package:djuang_lite_app/controllers/profile_controller.dart';
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
 import 'package:djuang_lite_app/screens/customers/account/account_screen.dart';
-import 'package:djuang_lite_app/screens/customers/auth/login_screen.dart';
 import 'package:djuang_lite_app/screens/customers/booking/booking_screen.dart';
 import 'package:djuang_lite_app/screens/components/button_component.dart';
 import 'package:djuang_lite_app/screens/components/circle_component.dart';
@@ -23,6 +23,7 @@ class HomeCustomerScreen extends StatefulWidget {
 class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
   AuthController authController = Get.put(AuthController());
   ProfileController profileController = Get.put(ProfileController());
+  ScheduleController scheduleController = Get.put(ScheduleController());
 
   @override
   Widget build(BuildContext context) {
@@ -190,15 +191,25 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
 
                   const SizedBox(height: 10,),
 
-                  Row(
-                    children: const [
-                      ScheduleComponent(),
-
-                      SizedBox(width: 15,),
-
-                      ScheduleComponent(),
-                    ],
-                  ),
+                  Obx((() {
+                    if(scheduleController.isLoading.value){
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }else{
+                      return ListView.builder(
+                        padding: const EdgeInsets.all(0),
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        itemCount: scheduleController.scheduleList.length,
+                        itemBuilder: (context, index) {
+                          var row = scheduleController.scheduleList[index];
+                          return (scheduleController.scheduleList.isEmpty) ? const Center(child: Text('Data is empty!'),) : ScheduleComponent(time: row.timePickup.toString(), pickup: row.pickupAddress.toString(), destination: row.destinationAddress);
+                        },
+                      );
+                    }  
+                  })),
 
                   const SizedBox(height: 20,),
 
