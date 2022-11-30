@@ -1,14 +1,24 @@
+import 'package:djuang_lite_app/controllers/customers/order_controller.dart';
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
 import 'package:djuang_lite_app/screens/components/button_component.dart';
+import 'package:djuang_lite_app/screens/components/date_picker_component.dart';
 import 'package:djuang_lite_app/screens/components/input_component.dart';
 import 'package:djuang_lite_app/screens/components/label_component.dart';
+import 'package:djuang_lite_app/screens/components/time_picker_component.dart';
 import 'package:djuang_lite_app/screens/customers/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class BookingScreen extends StatelessWidget {
+class BookingScreen extends StatefulWidget {
   const BookingScreen({super.key});
+
+  @override
+  State<BookingScreen> createState() => _BookingScreenState();
+}
+
+class _BookingScreenState extends State<BookingScreen> {
+  OrderController orderController = Get.put(OrderController());
 
   @override
   Widget build(BuildContext context) {
@@ -47,44 +57,51 @@ class BookingScreen extends StatelessWidget {
               const SizedBox(height: 20,),
 
               const LabelComponent(label: 'From : '),
-              const InputComponent(hintText: 'Senin', obscuredText: false, colors: ColorPicker.greyAccent),
+              DatePickerComponent(textEditingController: orderController.datePickerFrom, hintText: 'Senin', obscuredText: false, colors: ColorPicker.greyAccent),
 
               const SizedBox(height: 15,),
 
               const LabelComponent(label: 'Until : '),
-              const InputComponent(hintText: 'Jumat', obscuredText: false, colors: ColorPicker.greyAccent),
+              DatePickerComponent(textEditingController: orderController.datePickerTo, hintText: 'Senin', obscuredText: false, colors: ColorPicker.greyAccent),
 
               const SizedBox(height: 15,),
 
               const LabelComponent(label: 'Pickup Point (Departure) : '),
-              const InputComponent(hintText: 'Ex: Jl. Mertojoyo Gg 3, Merjosari', obscuredText: false, colors: ColorPicker.greyAccent),
+              InputComponent(textEditingController: orderController.pickupAddress, hintText: 'Ex: Jl. Mertojoyo Gg 3, Merjosari', obscuredText: false, colors: ColorPicker.greyAccent),
 
               const SizedBox(height: 15,),
 
               const LabelComponent(label: 'Destination : '),
-              const InputComponent(hintText: 'Ex: Rektor Universitas Brawijaya', obscuredText: false, colors: ColorPicker.greyAccent),
+              InputComponent(textEditingController: orderController.destinationAddress, hintText: 'Ex: Rektor Universitas Brawijaya', obscuredText: false, colors: ColorPicker.greyAccent),
 
               const SizedBox(height: 15,),
 
               const LabelComponent(label: 'Pickup Point (Return) : '),
-              const InputComponent(hintText: 'Ex: Depan Gedung Sipil UB', obscuredText: false, colors: ColorPicker.greyAccent),
+              InputComponent(textEditingController: orderController.pickupReturnAddress, hintText: 'Ex: Depan Gedung Sipil UB', obscuredText: false, colors: ColorPicker.greyAccent),
 
               const SizedBox(height: 15,),
 
               const LabelComponent(label: 'Hours of Departure : '),
-              const InputComponent(hintText: '07.00', obscuredText: false, colors: ColorPicker.greyAccent),
+              TimePickerComponent(textEditingController: orderController.hourDeparture, hintText: '07.00', obscuredText: false, colors: ColorPicker.greyAccent),
 
               const SizedBox(height: 15,),
 
               const LabelComponent(label: 'Hours of Return : '),
-              const InputComponent(hintText: '16.00', obscuredText: false, colors: ColorPicker.greyAccent),
+              TimePickerComponent(textEditingController: orderController.hourReturn, hintText: '16.00', obscuredText: false, colors: ColorPicker.greyAccent),
+
+              const SizedBox(height: 15,),
+
+              const LabelComponent(label: 'Information : '),
+              InputComponent(textEditingController: orderController.information, hintText: 'Ex: Dekat pintu masuk', obscuredText: false, colors: ColorPicker.greyAccent),
 
               const SizedBox(height: 20,),
 
-              const ButtonComponent(
+              ButtonComponent(
                 button: TextButton(
-                  onPressed: null,
-                  child: Text('Next', style: TextStyle(
+                  onPressed: (){
+                    orderController.addOrder();
+                  },
+                  child: const Text('Next', style: TextStyle(
                     color: ColorPicker.white,
                     fontFamily: FontPicker.semibold,
                     fontSize: 16

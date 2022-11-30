@@ -1,11 +1,19 @@
+import 'package:djuang_lite_app/controllers/customers/order_controller.dart';
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
 import 'package:djuang_lite_app/screens/customers/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class TransactionScreen extends StatelessWidget {
-  const TransactionScreen({super.key});
+class TransactionCustomerScreen extends StatefulWidget {
+  const TransactionCustomerScreen({super.key});
+
+  @override
+  State<TransactionCustomerScreen> createState() => _TransactionCustomerScreenState();
+}
+
+class _TransactionCustomerScreenState extends State<TransactionCustomerScreen> {
+  OrderController orderController= Get.put(OrderController());
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +53,7 @@ class TransactionScreen extends StatelessWidget {
               ),
 
               const Text(
-                'Lorem ipsum dolor jamet aopy loean',
+                'Enjoy with our service',
                 style: TextStyle(
                     fontFamily: FontPicker.regular,
                     fontSize: 14,
@@ -56,49 +64,63 @@ class TransactionScreen extends StatelessWidget {
                 height: 20,
               ),
 
-              ListView.builder(
-                padding: const EdgeInsets.all(0),
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                itemCount: 8,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 10),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: ColorPicker.white,
-                        boxShadow: const [
-                          BoxShadow(
-                              color: ColorPicker.greyLight,
-                              offset: Offset(0, 1),
-                              blurRadius: 1)
-                        ]),
-                    child: ListTile(
-                        title: Text(
-                          'TX-0000${index + 1}',
-                          style: const TextStyle(fontFamily: FontPicker.medium),
-                        ),
-                        subtitle: const Text(
-                          'Lorem ipsum dolor',
-                          style: TextStyle(
-                              fontFamily: FontPicker.regular, fontSize: 12),
-                        ),
-                        trailing: Wrap(
-                          children: const [
-                            Text('Success ', style: TextStyle(
-                              color: ColorPicker.grey,
-                            ),),
-                            Icon(
-                                Icons.check_circle_outline,
-                                color: ColorPicker.green,
-                                size: 18,
-                              )
-                          ],
-                        )
-                      )
+              Obx((){
+                if(orderController.isLoading.value){
+                  return const Center(
+                    child: CircularProgressIndicator(),
                   );
-                },
-              )
+                }else{
+                  return ListView.builder(
+                    padding: const EdgeInsets.all(0),
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemCount: orderController.orderList.length,
+                    itemBuilder: (context, index) {
+                      final row = orderController.orderList[index];
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: 10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: ColorPicker.white,
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: ColorPicker.greyLight,
+                                  offset: Offset(0, 1),
+                                  blurRadius: 1)
+                            ]),
+                        child: ListTile(
+                            title: Text(row.id,
+                              style: const TextStyle(fontFamily: FontPicker.medium),
+                            ),
+                            subtitle: Text(
+                              '- ${row.schedule.pickupAddress} ',
+                              style: const TextStyle(
+                                  fontFamily: FontPicker.regular, fontSize: 12),
+                            ),
+                            trailing: Wrap(
+                              children: [
+                                Text('${row.status} ', style: const TextStyle(
+                                  color: ColorPicker.grey,
+                                ),),
+                                
+                                (row.status == 'paid') ? const Icon(
+                                  Icons.check_circle_outline,
+                                  color: ColorPicker.green,
+                                  size: 18,
+                                ) : Icon(
+                                  Icons.pending_actions,
+                                  color: (row.status == 'processing') ? ColorPicker.warning : ColorPicker.danger,
+                                  size: 18,
+                                )
+                              ],
+                            )
+                          )
+                        );
+                      },
+                    );
+                  }
+                }
+              ),
             ],
           ),
         ),

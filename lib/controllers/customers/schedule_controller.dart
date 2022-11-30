@@ -43,7 +43,8 @@ class ScheduleController extends GetxController{
       print(jsonDecode(response.body));
 
       if(response.statusCode == 200){
-        var jsonString = response.body;
+        var decodeJson = json.decode(response.body)['data'];
+        var jsonString = json.encode(decodeJson);
         return scheduleModelFromJson(jsonString);
       }
 

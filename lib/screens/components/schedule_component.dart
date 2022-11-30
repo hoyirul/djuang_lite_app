@@ -50,7 +50,7 @@ class ScheduleComponent extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Text('$pickup - $destination', style: const TextStyle(
               color: ColorPicker.dark,
-              fontFamily: FontPicker.semibold,
+              fontFamily: FontPicker.medium,
               fontSize: 12
             ),),
           ),

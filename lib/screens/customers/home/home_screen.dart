@@ -1,4 +1,5 @@
 import 'package:djuang_lite_app/controllers/auth/auth_controller.dart';
+import 'package:djuang_lite_app/controllers/customers/order_controller.dart';
 import 'package:djuang_lite_app/controllers/customers/schedule_controller.dart';
 import 'package:djuang_lite_app/controllers/profile_controller.dart';
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
@@ -24,6 +25,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
   AuthController authController = Get.put(AuthController());
   ProfileController profileController = Get.put(ProfileController());
   ScheduleController scheduleController = Get.put(ScheduleController());
+  OrderController orderController = Get.put(OrderController());
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +150,7 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                         Expanded(
                           child: InkWell(
                             onTap: () {
-                              Get.off(const TransactionScreen());
+                              Get.off(const TransactionCustomerScreen());
                             },
                             child: const HomeFeatureComponent(icons: 'assets/icons/transactions.svg', title: 'Transactions')
                           )
@@ -211,6 +213,28 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                     }  
                   })),
 
+                  const SizedBox(height: 10,),
+
+                  Obx((() {
+                    if(scheduleController.isLoading.value){
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }else{
+                      return ListView.builder(
+                        padding: const EdgeInsets.all(0),
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        itemCount: scheduleController.scheduleList.length,
+                        itemBuilder: (context, index) {
+                          var row = scheduleController.scheduleList[index];
+                          return (scheduleController.scheduleList.isEmpty) ? const Center(child: Text('Data is empty!'),) : ScheduleComponent(time: row.timeReturn.toString(), pickup: row.pickupReturnAddress.toString(), destination: row.pickupAddress);
+                        },
+                      );
+                    }  
+                  })),
+
                   const SizedBox(height: 20,),
 
                   const Align(
@@ -224,38 +248,47 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
 
                   const SizedBox(height: 10,),
 
-                  ListView.builder(
-                    padding: const EdgeInsets.all(0),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    itemCount: 8,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: const EdgeInsets.only(bottom: 10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: ColorPicker.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: ColorPicker.greyLight,
-                              offset: Offset(0, 1),
-                              blurRadius: 1
-                            )
-                          ]
-                        ),
-                        child: ListTile(
-                          title: Text('Histories ${index + 1}', style: const TextStyle(
-                            fontFamily: FontPicker.medium
-                          ),),
-                          subtitle: const Text('Lorem ipsum dolor', style: TextStyle(
-                            fontFamily: FontPicker.regular,
-                            fontSize: 12
-                          ),),
-                          trailing: (index % 2 == 1 ) ? const Icon(Icons.check_circle_outline, color: ColorPicker.green,) : const Icon(Icons.remove_circle_outline, color: ColorPicker.primary,)
-                        ),
+                  Obx((){
+                    if(orderController.isLoading.value){
+                      return const Center(
+                        child: CircularProgressIndicator(),
                       );
-                    },
-                  )
+                    }else{
+                      return ListView.builder(
+                        padding: const EdgeInsets.all(0),
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: orderController.orderList.length,
+                        itemBuilder: (context, index) {
+                          final row = orderController.orderList[index];
+                          return Container(
+                            margin: const EdgeInsets.only(bottom: 10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: ColorPicker.white,
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: ColorPicker.greyLight,
+                                  offset: Offset(0, 1),
+                                  blurRadius: 1
+                                )
+                              ]
+                            ),
+                            child: ListTile(
+                              title: Text(row.id, style: const TextStyle(
+                                fontFamily: FontPicker.medium
+                              ),),
+                              subtitle: Text('${row.createdAt.toLocal()}', style: const TextStyle(
+                                fontFamily: FontPicker.regular,
+                                fontSize: 12
+                              ),),
+                              trailing: (row.status == 'processing' ) ? const Icon(Icons.check_circle_outline, color: ColorPicker.green,) : const Icon(Icons.refresh_rounded, color: ColorPicker.warning,)
+                            ),
+                          );
+                        },
+                      );
+                    }
+                  }),
                 ],
               ),
             )
