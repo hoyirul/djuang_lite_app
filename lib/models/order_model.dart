@@ -16,6 +16,8 @@ class OrderModel {
         required this.createdAt,
         required this.updatedAt,
         required this.schedule,
+        required this.customer,
+        required this.driver,
     });
 
     String id;
@@ -28,6 +30,8 @@ class OrderModel {
     DateTime createdAt;
     DateTime updatedAt;
     Schedule schedule;
+    Customer customer;
+    Customer driver;
 
     factory OrderModel.fromJson(Map<String, dynamic> json) => OrderModel(
         id: json["id"],
@@ -40,6 +44,8 @@ class OrderModel {
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         schedule: Schedule.fromJson(json["schedule"]),
+        customer: Customer.fromJson(json["customer"]),
+        driver: Customer.fromJson(json["driver"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -53,6 +59,112 @@ class OrderModel {
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
         "schedule": schedule.toJson(),
+        "customer": customer.toJson(),
+        "driver": driver.toJson(),
+    };
+}
+
+class Customer {
+    Customer({
+        required this.id,
+        required this.name,
+        required this.email,
+        required this.emailVerifiedAt,
+        required this.address,
+        required this.roleId,
+        required this.image,
+        required this.status,
+        required this.createdAt,
+        required this.updatedAt,
+    });
+
+    int id;
+    String name;
+    String email;
+    dynamic emailVerifiedAt;
+    dynamic address;
+    int roleId;
+    dynamic image;
+    String status;
+    DateTime createdAt;
+    DateTime updatedAt;
+
+    factory Customer.fromJson(Map<String, dynamic> json) => Customer(
+        id: json["id"],
+        name: json["name"],
+        email: json["email"],
+        emailVerifiedAt: json["email_verified_at"],
+        address: json["address"],
+        roleId: json["role_id"],
+        image: json["image"],
+        status: json["status"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "email": email,
+        "email_verified_at": emailVerifiedAt,
+        "address": address,
+        "role_id": roleId,
+        "image": image,
+        "status": status,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+    };
+}
+
+class Driver {
+    Driver({
+        required this.id,
+        required this.name,
+        required this.email,
+        required this.emailVerifiedAt,
+        required this.address,
+        required this.roleId,
+        required this.image,
+        required this.status,
+        required this.createdAt,
+        required this.updatedAt,
+    });
+
+    int id;
+    String name;
+    String email;
+    dynamic emailVerifiedAt;
+    dynamic address;
+    int roleId;
+    dynamic image;
+    String status;
+    DateTime createdAt;
+    DateTime updatedAt;
+
+    factory Driver.fromJson(Map<String, dynamic> json) => Driver(
+        id: json["id"],
+        name: json["name"],
+        email: json["email"],
+        emailVerifiedAt: json["email_verified_at"],
+        address: json["address"],
+        roleId: json["role_id"],
+        image: json["image"],
+        status: json["status"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "email": email,
+        "email_verified_at": emailVerifiedAt,
+        "address": address,
+        "role_id": roleId,
+        "image": image,
+        "status": status,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
     };
 }
 

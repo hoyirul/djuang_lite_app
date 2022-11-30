@@ -54,9 +54,6 @@ class OrderController extends GetxController{
 
       final response = await http.get(url, headers: HeaderHelper().headersLogged(prefs.getString('token_type'), prefs.getString('access_token')));
 
-      print(response.statusCode);
-      print(jsonDecode(response.body));
-
       if(response.statusCode == 200){
         var decodeJson = json.decode(response.body)['data'];
         var jsonString = json.encode(decodeJson);
@@ -112,10 +109,7 @@ class OrderController extends GetxController{
     };
     try{
       final response = await http.post(url, body: jsonEncode(body), headers: HeaderHelper().headersLogged(prefs.getString('token_type'), prefs.getString('access_token')));
-      print(response.body);
       if(response.statusCode == 200){
-        final json = jsonDecode(response.body);
-
         datePickerFrom!.clear();
         datePickerTo!.clear();
         pickupAddress.clear();

@@ -39,9 +39,6 @@ class ScheduleController extends GetxController{
 
       final response = await http.get(url, headers: HeaderHelper().headersLogged(prefs.getString('token_type'), prefs.getString('access_token')));
 
-      print(response.statusCode);
-      print(jsonDecode(response.body));
-
       if(response.statusCode == 200){
         var decodeJson = json.decode(response.body)['data'];
         var jsonString = json.encode(decodeJson);

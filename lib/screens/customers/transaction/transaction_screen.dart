@@ -2,6 +2,7 @@ import 'package:djuang_lite_app/controllers/customers/order_controller.dart';
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
 import 'package:djuang_lite_app/screens/customers/home/home_screen.dart';
+import 'package:djuang_lite_app/screens/customers/transaction/detail_transaction_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -88,33 +89,67 @@ class _TransactionCustomerScreenState extends State<TransactionCustomerScreen> {
                                   offset: Offset(0, 1),
                                   blurRadius: 1)
                             ]),
-                        child: ListTile(
-                            title: Text(row.id,
-                              style: const TextStyle(fontFamily: FontPicker.medium),
+                        child: InkWell(
+                          onTap: () async {
+                            if(row.driverId == 0){
+                              await showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const SimpleDialog(
+                                    title: Text('Warning', style: TextStyle(
+                                      color: ColorPicker.warning,
+                                      fontFamily: FontPicker.medium
+                                    ),),
+                                    contentPadding: EdgeInsets.all(20),
+                                    children: [Text('Your transaction still in process!')],
+                                  );
+                                },
+                              );
+                            }else{
+                              Get.off(DetailTransactionCustomerScreen(
+                                txid: row.id.toString(),
+                                customer: row.customer.name,
+                                driver: row.driver.name,
+                                pickupAddress: row.schedule.pickupAddress,
+                                destinationAddress: row.schedule.destinationAddress,
+                                pickupReturnAddress: row.schedule.pickupReturnAddress,
+                                timePickup: row.schedule.timePickup,
+                                timeReturn: row.schedule.timeReturn,
+                                start: row.schedule.dateStart.toString(),
+                                end: row.schedule.dateEnd.toString(),
+                                total: row.total,
+                                status: row.status,
+                              ));
+                            }
+                          },
+                          child: ListTile(
+                              title: Text(row.id,
+                                style: const TextStyle(fontFamily: FontPicker.medium),
+                              ),
+                              subtitle: Text(
+                                '${row.schedule.pickupAddress} ',
+                                style: const TextStyle(
+                                    fontFamily: FontPicker.regular, fontSize: 12),
+                              ),
+                              trailing: Wrap(
+                                children: [
+                                  Text('${row.status} ', style: const TextStyle(
+                                    color: ColorPicker.grey,
+                                  ),),
+                                  
+                                  (row.status == 'paid') ? const Icon(
+                                    Icons.check_circle_outline,
+                                    color: ColorPicker.green,
+                                    size: 18,
+                                  ) : Icon(
+                                    Icons.pending_actions,
+                                    color: (row.status == 'processing') ? ColorPicker.warning : ColorPicker.danger,
+                                    size: 18,
+                                  )
+                                ],
+                              )
                             ),
-                            subtitle: Text(
-                              '- ${row.schedule.pickupAddress} ',
-                              style: const TextStyle(
-                                  fontFamily: FontPicker.regular, fontSize: 12),
-                            ),
-                            trailing: Wrap(
-                              children: [
-                                Text('${row.status} ', style: const TextStyle(
-                                  color: ColorPicker.grey,
-                                ),),
-                                
-                                (row.status == 'paid') ? const Icon(
-                                  Icons.check_circle_outline,
-                                  color: ColorPicker.green,
-                                  size: 18,
-                                ) : Icon(
-                                  Icons.pending_actions,
-                                  color: (row.status == 'processing') ? ColorPicker.warning : ColorPicker.danger,
-                                  size: 18,
-                                )
-                              ],
-                            )
-                          )
+                        )
                         );
                       },
                     );

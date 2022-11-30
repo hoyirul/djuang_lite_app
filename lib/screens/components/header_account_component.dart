@@ -1,4 +1,4 @@
-import 'package:djuang_lite_app/controllers/auth/auth_controller.dart';
+
 import 'package:djuang_lite_app/controllers/profile_controller.dart';
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';

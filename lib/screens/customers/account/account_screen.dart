@@ -74,8 +74,21 @@ class _AccountCustomerScreenState extends State<AccountCustomerScreen> {
               ),
 
               InkWell(
-                onTap: () {
-                  print('oke');
+                onTap: () async {
+                  await showDialog(
+                    context: context,
+                    builder: (context) {
+                      return const SimpleDialog(
+                        alignment: Alignment.center,
+                        title: Text('Information', style: TextStyle(
+                          color: ColorPicker.green,
+                          fontFamily: FontPicker.medium
+                        ),),
+                        contentPadding: EdgeInsets.all(20),
+                        children: [Text('You can chat me on Whatsapp : +628574577438')],
+                      );
+                    },
+                  );
                 },
                 child: const SettingComponentFeatures(
                   title: 'Help', 

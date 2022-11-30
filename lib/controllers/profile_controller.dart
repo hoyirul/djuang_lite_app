@@ -98,7 +98,6 @@ class ProfileController extends GetxController{
 
     try{
       final response = await http.put(url, body: jsonEncode(body), headers: HeaderHelper().headersLogged(prefs.getString('token_type'), prefs.getString('access_token')));
-      print(response.statusCode);
       if(response.statusCode == 200){
         final json = jsonDecode(response.body)['data'];
         prefs.setString('name', json['name']);
@@ -132,7 +131,6 @@ class ProfileController extends GetxController{
 
     try{
       final response = await http.put(url, body: jsonEncode(body), headers: HeaderHelper().headersLogged(prefs.getString('token_type'), prefs.getString('access_token')));
-      print(response.statusCode);
       if(response.statusCode == 200){
         oldPasswordController.clear();
         passwordController.clear();

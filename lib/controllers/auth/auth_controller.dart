@@ -49,7 +49,6 @@ class AuthController extends GetxController{
     }else{
       try{
         final response = await http.post(url, body: jsonEncode(body), headers: HeaderHelper().headersUnlogged());
-        print(response.body);
         if(response.statusCode == 200){
           final json = jsonDecode(response.body);
           final SharedPreferences prefs = await preferences;
@@ -93,10 +92,7 @@ class AuthController extends GetxController{
       }else{
         try{
           final response = await http.post(url, body: jsonEncode(body), headers: HeaderHelper().headersUnlogged());
-          print(response.body);
           if(response.statusCode == 200){
-            final json = jsonDecode(response.body);
-
             nameController.clear();
             emailController.clear();
             passwordController.clear();
@@ -120,7 +116,6 @@ class AuthController extends GetxController{
     final url = Uri.parse(HttpHelper().getUri('/auth/logout'));
     try{
       final response = await http.post(url, headers: HeaderHelper().headersLogged(prefs.getString('token_type'), prefs.getString('access_token')));
-      print(response.body);
       if(response.statusCode == 200){
         prefs.clear();
         Get.off(const LoginCustomerScreen());
