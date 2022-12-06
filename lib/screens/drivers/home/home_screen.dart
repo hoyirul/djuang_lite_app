@@ -1,11 +1,14 @@
+import 'package:djuang_lite_app/controllers/auth/auth_controller.dart';
+import 'package:djuang_lite_app/controllers/drivers/order_controller.dart';
+import 'package:djuang_lite_app/controllers/drivers/schedule_controller.dart';
+import 'package:djuang_lite_app/controllers/profile_controller.dart';
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
-import 'package:djuang_lite_app/screens/drivers/account/account_screen.dart';
-import 'package:djuang_lite_app/screens/drivers/auth/login_screen.dart';
 import 'package:djuang_lite_app/screens/components/button_component.dart';
 import 'package:djuang_lite_app/screens/components/circle_component.dart';
 import 'package:djuang_lite_app/screens/components/home_feature_component.dart';
 import 'package:djuang_lite_app/screens/components/schedule_component.dart';
+import 'package:djuang_lite_app/screens/drivers/account/account_screen.dart';
 import 'package:djuang_lite_app/screens/drivers/schedules/schedule_screen.dart';
 import 'package:djuang_lite_app/screens/drivers/transaction/transaction_screen.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +22,11 @@ class HomeDriverScreen extends StatefulWidget {
 }
 
 class _HomeDriverScreenState extends State<HomeDriverScreen> {
+  AuthController authController = Get.put(AuthController());
+  ProfileController profileController = Get.put(ProfileController());
+  ScheduleController scheduleController = Get.put(ScheduleController());
+  OrderController orderController = Get.put(OrderController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,18 +68,28 @@ class _HomeDriverScreenState extends State<HomeDriverScreen> {
                   top: 80,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text('Hi, John Lenon', style: TextStyle(
-                        fontFamily: FontPicker.bold,
-                        fontSize: 21,
-                        color: ColorPicker.white
-                      ),),
+                    children: [
+                      FutureBuilder(
+                        future: profileController.getName(),
+                        builder: (context, snapshot) {
+                          return Text('Hi, ${snapshot.data}', style: const TextStyle(
+                          fontFamily: FontPicker.semibold,
+                          fontSize: 16,
+                          color: ColorPicker.white
+                        ),);
+                        },
+                      ),
 
-                      Text('Lorem ipsum dolor jamet ansu', style: TextStyle(
-                        fontFamily: FontPicker.regular,
-                        fontSize: 13,
-                        color: ColorPicker.white
-                      ),),
+                      FutureBuilder(
+                        future: profileController.getEmail(),
+                        builder: (context, snapshot) {
+                          return Text('${snapshot.data}', style: const TextStyle(
+                          fontFamily: FontPicker.regular,
+                          fontSize: 11,
+                          color: ColorPicker.white
+                        ),);
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -82,7 +100,7 @@ class _HomeDriverScreenState extends State<HomeDriverScreen> {
                   child: ButtonComponent(
                     button: TextButton(
                       onPressed: () {
-                        Get.offAll(const LoginDriverScreen());
+                        authController.logout();
                       },
                       child: const Text('Logout', style: TextStyle(
                         fontFamily: FontPicker.semibold,
@@ -121,7 +139,7 @@ class _HomeDriverScreenState extends State<HomeDriverScreen> {
                         Expanded(
                           child: InkWell(
                             onTap: () {
-                              Get.offAll(const ScheduleScreen());
+                              Get.offAll(const ScheduleDriverScreen());
                             },
                             child: const HomeFeatureComponent(icons: 'assets/icons/booking.svg', title: 'Schedules')
                           )
@@ -132,7 +150,7 @@ class _HomeDriverScreenState extends State<HomeDriverScreen> {
                         Expanded(
                           child: InkWell(
                             onTap: () {
-                              Get.off(const TransactionScreen());
+                              Get.off(const TransactionDriverScreen());
                             },
                             child: const HomeFeatureComponent(icons: 'assets/icons/transactions.svg', title: 'Transactions')
                           )
@@ -167,69 +185,110 @@ class _HomeDriverScreenState extends State<HomeDriverScreen> {
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Text('Schedules', style: TextStyle(
-                      fontFamily: FontPicker.bold,
+                      fontFamily: FontPicker.semibold,
                       color: ColorPicker.dark,
-                      fontSize: 23
+                      fontSize: 18
                     ),)
                   ),
 
                   const SizedBox(height: 10,),
 
-                  Row(
-                    children: const [
-                      ScheduleComponent(time: '', pickup: '', destination: '',),
+                  Obx((() {
+                    if(scheduleController.isLoading.value){
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }else{
+                      return ListView.builder(
+                        padding: const EdgeInsets.all(0),
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        itemCount: scheduleController.scheduleList.length,
+                        itemBuilder: (context, index) {
+                          var row = scheduleController.scheduleList[index];
+                          return (scheduleController.scheduleList.isEmpty) ? const Center(child: Text('Data is empty!'),) : ScheduleComponent(time: row.timePickup.toString(), pickup: row.pickupAddress.toString(), destination: row.destinationAddress);
+                        },
+                      );
+                    }  
+                  })),
 
-                      SizedBox(width: 15,),
+                  const SizedBox(height: 10,),
 
-                      ScheduleComponent(time: '', pickup: '', destination: '',),
-                    ],
-                  ),
+                  Obx((() {
+                    if(scheduleController.isLoading.value){
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }else{
+                      return ListView.builder(
+                        padding: const EdgeInsets.all(0),
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        itemCount: scheduleController.scheduleList.length,
+                        itemBuilder: (context, index) {
+                          var row = scheduleController.scheduleList[index];
+                          return (scheduleController.scheduleList.isEmpty) ? const Center(child: Text('Data is empty!'),) : ScheduleComponent(time: row.timeReturn.toString(), pickup: row.pickupReturnAddress.toString(), destination: row.pickupAddress);
+                        },
+                      );
+                    }  
+                  })),
 
                   const SizedBox(height: 20,),
 
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Text('Histories', style: TextStyle(
-                      fontFamily: FontPicker.bold,
+                      fontFamily: FontPicker.semibold,
                       color: ColorPicker.dark,
-                      fontSize: 23
+                      fontSize: 18
                     ),)
                   ),
 
                   const SizedBox(height: 10,),
 
-                  ListView.builder(
-                    padding: const EdgeInsets.all(0),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    itemCount: 8,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: const EdgeInsets.only(bottom: 10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: ColorPicker.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: ColorPicker.greyLight,
-                              offset: Offset(0, 1),
-                              blurRadius: 1
-                            )
-                          ]
-                        ),
-                        child: ListTile(
-                          title: Text('Histories ${index + 1}', style: const TextStyle(
-                            fontFamily: FontPicker.medium
-                          ),),
-                          subtitle: const Text('Lorem ipsum dolor', style: TextStyle(
-                            fontFamily: FontPicker.regular,
-                            fontSize: 12
-                          ),),
-                          trailing: (index % 2 == 1 ) ? const Icon(Icons.check_circle_outline, color: ColorPicker.green,) : const Icon(Icons.remove_circle_outline, color: ColorPicker.primary,)
-                        ),
+                  Obx((){
+                    if(orderController.isLoading.value){
+                      return const Center(
+                        child: CircularProgressIndicator(),
                       );
-                    },
-                  )
+                    }else{
+                      return ListView.builder(
+                        padding: const EdgeInsets.all(0),
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: orderController.orderList.length,
+                        itemBuilder: (context, index) {
+                          final row = orderController.orderList[index];
+                          return Container(
+                            margin: const EdgeInsets.only(bottom: 10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: ColorPicker.white,
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: ColorPicker.greyLight,
+                                  offset: Offset(0, 1),
+                                  blurRadius: 1
+                                )
+                              ]
+                            ),
+                            child: ListTile(
+                              title: Text(row.id, style: const TextStyle(
+                                fontFamily: FontPicker.medium
+                              ),),
+                              subtitle: Text('${row.createdAt.toLocal()}', style: const TextStyle(
+                                fontFamily: FontPicker.regular,
+                                fontSize: 12
+                              ),),
+                              trailing: (row.status == 'processing' ) ? const Icon(Icons.check_circle_outline, color: ColorPicker.green,) : const Icon(Icons.refresh_rounded, color: ColorPicker.warning,)
+                            ),
+                          );
+                        },
+                      );
+                    }
+                  }),
                 ],
               ),
             )

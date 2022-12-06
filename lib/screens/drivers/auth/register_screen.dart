@@ -1,3 +1,4 @@
+import 'package:djuang_lite_app/controllers/auth/auth_controller.dart';
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
 import 'package:djuang_lite_app/screens/drivers/auth/login_screen.dart';
@@ -8,8 +9,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class RegisterDriverScreen extends StatelessWidget {
+class RegisterDriverScreen extends StatefulWidget {
   const RegisterDriverScreen({super.key});
+
+  @override
+  State<RegisterDriverScreen> createState() => _RegisterDriverScreenState();
+}
+
+class _RegisterDriverScreenState extends State<RegisterDriverScreen> {
+  AuthController authController = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -51,26 +59,26 @@ class RegisterDriverScreen extends StatelessWidget {
       
               const SizedBox(height: 20,),
               const LabelComponent(label: 'Name : '),
-              const InputComponent(hintText: 'Enter your name', obscuredText: false, colors: ColorPicker.greyAccent,),
+              InputComponent(textEditingController: authController.nameController, hintText: 'Enter your name', obscuredText: false, colors: ColorPicker.greyAccent,),
       
               const SizedBox(height: 15,),
               const LabelComponent(label: 'Email : '),
-              const InputComponent(hintText: 'Enter your email', obscuredText: false, colors: ColorPicker.greyAccent,),
+              InputComponent(textEditingController: authController.emailController, hintText: 'Enter your email', obscuredText: false, colors: ColorPicker.greyAccent,),
       
               const SizedBox(height: 15,),
               const LabelComponent(label: 'Password : '),
-              const InputComponent(hintText: 'Enter your password', obscuredText: true, colors: ColorPicker.greyAccent,),
+              InputComponent(textEditingController: authController.passwordController, hintText: 'Enter your password', obscuredText: true, colors: ColorPicker.greyAccent,),
       
               const SizedBox(height: 15,),
               const LabelComponent(label: 'Confirm Password : '),
-              const InputComponent(hintText: 'Confirm your password', obscuredText: true, colors: ColorPicker.greyAccent,),
+              InputComponent(textEditingController: authController.passwordConfimationController, hintText: 'Confirm your password', obscuredText: true, colors: ColorPicker.greyAccent,),
       
               const SizedBox(height: 25,),
-              const ButtonComponent(
+              ButtonComponent(
                 height: 50,
                 width: double.infinity,
                 colors: ColorPicker.primary,
-                button: TextButton(onPressed: null, child: Text('Sign up as Driver', style: TextStyle(
+                button: TextButton(onPressed: () => authController.authRegister('driver'), child: const Text('Sign up', style: TextStyle(
                   fontSize: 14,
                   fontFamily: FontPicker.bold,
                   color: ColorPicker.white

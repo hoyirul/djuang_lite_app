@@ -1,3 +1,4 @@
+import 'package:djuang_lite_app/controllers/auth/auth_controller.dart';
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
 import 'package:djuang_lite_app/screens/components/button_component.dart';
@@ -9,8 +10,15 @@ import 'package:djuang_lite_app/screens/drivers/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AccountDriverScreen extends StatelessWidget {
+class AccountDriverScreen extends StatefulWidget {
   const AccountDriverScreen({super.key});
+
+  @override
+  State<AccountDriverScreen> createState() => _AccountDriverScreenState();
+}
+
+class _AccountDriverScreenState extends State<AccountDriverScreen> {
+  AuthController authController = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +74,21 @@ class AccountDriverScreen extends StatelessWidget {
               ),
 
               InkWell(
-                onTap: () {
-                  print('oke');
+                onTap: () async {
+                  await showDialog(
+                    context: context,
+                    builder: (context) {
+                      return const SimpleDialog(
+                        alignment: Alignment.center,
+                        title: Text('Information', style: TextStyle(
+                          color: ColorPicker.green,
+                          fontFamily: FontPicker.medium
+                        ),),
+                        contentPadding: EdgeInsets.all(20),
+                        children: [Text('You can chat me on Whatsapp : +628574577438')],
+                      );
+                    },
+                  );
                 },
                 child: const SettingComponentFeatures(
                   title: 'Help', 
@@ -79,7 +100,7 @@ class AccountDriverScreen extends StatelessWidget {
               ButtonComponent(
                 button: TextButton(
                   onPressed: () {
-                    print('Logout');
+                    authController.logout();
                   },
                   child: const Text('Logout', style: TextStyle(
                     color: ColorPicker.white,

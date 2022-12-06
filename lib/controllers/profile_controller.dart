@@ -71,6 +71,11 @@ class ProfileController extends GetxController{
     return prefs.getString('image');
   }
 
+  Future<String?> getStatus() async {
+    final prefs = await _prefs;
+    return prefs.getString('status');
+  }
+
   void showAlert(title, error, Color colors){
     showDialog(
       context: Get.context!,

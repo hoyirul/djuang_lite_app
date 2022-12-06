@@ -34,7 +34,7 @@ class ScheduleController extends GetxController{
   Future<List<ScheduleModel>?> getList() async {
     final prefs = await _prefs;
     var id = prefs.getInt('id');
-    var url = Uri.parse(HttpHelper().getUri('/schedules/customer/$id'));
+    var url = Uri.parse(HttpHelper().getUri('/schedules/driver/$id'));
 
     final response = await http.get(url, headers: HeaderHelper().headersLogged(prefs.getString('token_type'), prefs.getString('access_token')));
     try{
@@ -47,6 +47,7 @@ class ScheduleController extends GetxController{
       }else if(response.statusCode == 204){
         throw 'You don`t have a schedule yet';
       }
+
     }catch(error){
       Get.back();
       

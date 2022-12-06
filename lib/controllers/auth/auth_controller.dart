@@ -15,8 +15,8 @@ import 'package:http/http.dart' as http;
 
 class AuthController extends GetxController{
   TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController(text: 'customer@djuang.id');
-  TextEditingController passwordController = TextEditingController(text: 'password');
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   TextEditingController passwordConfimationController = TextEditingController();
 
   final Future<SharedPreferences> preferences = SharedPreferences.getInstance();
@@ -60,6 +60,7 @@ class AuthController extends GetxController{
           prefs.setInt('role_id', json['data']['user']['role_id']);
           prefs.setString('address', json['data']['user']['address'] ?? '');
           prefs.setString('image', json['data']['user']['image'] ?? '');
+          prefs.setString('status', json['data']['user']['status'] ?? '');
 
           emailController.clear();
           passwordController.clear();

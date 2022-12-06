@@ -1,3 +1,4 @@
+import 'package:djuang_lite_app/controllers/auth/auth_controller.dart';
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
 import 'package:djuang_lite_app/screens/choices/choice_screen.dart';
@@ -5,14 +6,19 @@ import 'package:djuang_lite_app/screens/drivers/auth/register_screen.dart';
 import 'package:djuang_lite_app/screens/components/button_component.dart';
 import 'package:djuang_lite_app/screens/components/input_component.dart';
 import 'package:djuang_lite_app/screens/components/label_component.dart';
-import 'package:djuang_lite_app/screens/drivers/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class LoginDriverScreen extends StatelessWidget {
+class LoginDriverScreen extends StatefulWidget {
   const LoginDriverScreen({super.key});
 
+  @override
+  State<LoginDriverScreen> createState() => _LoginDriverScreenState();
+}
+
+class _LoginDriverScreenState extends State<LoginDriverScreen> {
+  final AuthController authController = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +39,7 @@ class LoginDriverScreen extends StatelessWidget {
                   ],
                 ),
               ),
+
               Container(
                 padding: const EdgeInsets.only(top: 25, left: 25, right: 25, bottom: 10),
                 height: 250,
@@ -41,7 +48,7 @@ class LoginDriverScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(25),
                   color: Colors.transparent
                 ),
-                child: SvgPicture.asset('assets/svg/auth_driver.svg'),
+                child: SvgPicture.asset('assets/svg/auth.svg'),
               ),
               const SizedBox(height: 25,),
               const Align(
@@ -64,11 +71,11 @@ class LoginDriverScreen extends StatelessWidget {
             
               const SizedBox(height: 20,),
               const LabelComponent(label: 'Email : '),
-              const InputComponent(hintText: 'Enter your email', obscuredText: false, colors: ColorPicker.greyAccent,),
+              InputComponent(textEditingController: authController.emailController, hintText: 'Enter your email', obscuredText: false, colors: ColorPicker.greyAccent,),
       
               const SizedBox(height: 15,),
               const LabelComponent(label: 'Password : '),
-              const InputComponent(hintText: 'Enter your password', obscuredText: true, colors: ColorPicker.greyAccent,),
+              InputComponent(textEditingController: authController.passwordController, hintText: 'Enter your password', obscuredText: true, colors: ColorPicker.greyAccent,),
 
               const SizedBox(height: 25,),
               ButtonComponent(
@@ -77,9 +84,9 @@ class LoginDriverScreen extends StatelessWidget {
                 colors: ColorPicker.primary,
                 button: TextButton(
                   onPressed: () {
-                    Get.offAll(const HomeDriverScreen());
+                    authController.authLogin('driver');
                   }, 
-                  child: const Text('Sign in as Driver', style: TextStyle(
+                  child: const Text('Sign in', style: TextStyle(
                     fontSize: 14,
                     fontFamily: FontPicker.bold,
                     color: ColorPicker.white
