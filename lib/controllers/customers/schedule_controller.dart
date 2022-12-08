@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ScheduleController extends GetxController{
   final isLoading = true.obs;
+  var isBook = true;
   final scheduleList = <ScheduleModel>[].obs;
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
@@ -24,7 +25,10 @@ class ScheduleController extends GetxController{
       isLoading(true);
       var schedules = await getList();
       if(schedules != null){
+        isBook = false;
         scheduleList.assignAll(schedules);
+      }else{
+        isBook = true;
       }
     } finally {
       isLoading(false);

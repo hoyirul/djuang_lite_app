@@ -84,6 +84,7 @@ class AuthController extends GetxController{
       'email': emailController.text.trim(),
       'password': passwordController.text,
       'role_id': (role == 'driver') ? 3 : 4,
+      'status': (role == 'driver') ? 'unused' : 'none'
     };
 
     if(emailController.text == '' || passwordController.text == '' || passwordController.text == '' || passwordConfimationController.text == ''){
@@ -94,6 +95,7 @@ class AuthController extends GetxController{
       }else{
         try{
           final response = await http.post(url, body: jsonEncode(body), headers: HeaderHelper().headersUnlogged());
+          print(response.body);
           if(response.statusCode == 200){
             nameController.clear();
             emailController.clear();
@@ -103,6 +105,8 @@ class AuthController extends GetxController{
             showAlert('Success', 'your account has been registered and please login!', Colors.green);
           }else if(response.statusCode == 400){
             throw jsonDecode(response.body)["errors"] ?? "Unknown Error Occured";
+          }else if(response.statusCode == 422){
+            throw jsonDecode(response.body)["data"] ?? "Unknown Error Occured";
           }else{
             throw jsonDecode(response.body)["errors"] ?? "Unknown Error Occured";
           }

@@ -139,7 +139,20 @@ class _HomeCustomerScreenState extends State<HomeCustomerScreen> {
                         Expanded(
                           child: InkWell(
                             onTap: () {
-                              Get.offAll(const BookingScreen());
+                              print(scheduleController.isBook);
+                              if(scheduleController.isBook == false){
+                                showDialog(
+                                  context: Get.context!,
+                                  builder: (context) {
+                                    return const SimpleDialog(
+                                      title: Text('Warning'),
+                                      contentPadding: EdgeInsets.all(20),
+                                      children: [Text('Unable to place an order, your order is in progress!')],
+                                    );
+                                  });
+                              }else{
+                                Get.offAll(const BookingScreen());
+                              }
                             },
                             child: const HomeFeatureComponent(icons: 'assets/icons/booking.svg', title: 'Booking')
                           )
