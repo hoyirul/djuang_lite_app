@@ -21,11 +21,11 @@ class OrderModel {
     });
 
     String id;
-    int customerId;
-    int driverId;
-    int scheduleId;
+    String customerId;
+    String driverId;
+    String scheduleId;
     DateTime orderDate;
-    int total;
+    String total;
     String status;
     DateTime createdAt;
     DateTime updatedAt;
@@ -83,7 +83,7 @@ class Customer {
     String email;
     dynamic emailVerifiedAt;
     dynamic address;
-    int roleId;
+    String roleId;
     dynamic image;
     String status;
     DateTime createdAt;
@@ -135,7 +135,7 @@ class Driver {
     String email;
     dynamic emailVerifiedAt;
     dynamic address;
-    int roleId;
+    String roleId;
     dynamic image;
     String status;
     DateTime createdAt;

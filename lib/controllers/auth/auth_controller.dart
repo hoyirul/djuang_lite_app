@@ -40,6 +40,7 @@ class AuthController extends GetxController{
 
   Future<void> authLogin(String role) async {
     final url = Uri.parse(HttpHelper().getUri('/auth/login/$role'));
+    print(url);
     Map body = {
       'email': emailController.text.trim(),
       'password': passwordController.text
@@ -50,6 +51,7 @@ class AuthController extends GetxController{
     }else{
       try{
         final response = await http.post(url, body: jsonEncode(body), headers: HeaderHelper().headersUnlogged());
+        print(response.statusCode);
         if(response.statusCode == 200){
           final json = jsonDecode(response.body);
           final SharedPreferences prefs = await preferences;
@@ -58,7 +60,7 @@ class AuthController extends GetxController{
           prefs.setString('token_type', json['data']['token_type']);
           prefs.setString('name', json['data']['user']['name']);
           prefs.setString('email', json['data']['user']['email']);
-          prefs.setInt('role_id', json['data']['user']['role_id']);
+          prefs.setString('role_id', json['data']['user']['role_id']);
           prefs.setString('address', json['data']['user']['address'] ?? '');
           prefs.setString('image', json['data']['user']['image'] ?? '');
           prefs.setString('status', json['data']['user']['status'] ?? '');

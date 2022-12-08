@@ -56,9 +56,9 @@ class ProfileController extends GetxController{
     return prefs.getString('email');
   }
 
-  Future<int?> getRoleId() async {
+  Future<String?> getRoleId() async {
     final prefs = await _prefs;
-    return prefs.getInt('role_id');
+    return prefs.getString('role_id');
   }
 
   Future<String?> getAddress() async {

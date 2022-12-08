@@ -117,7 +117,7 @@ class _TransactionCustomerScreenState extends State<TransactionCustomerScreen> {
                                 timeReturn: row.schedule.timeReturn,
                                 start: row.schedule.dateStart.toString(),
                                 end: row.schedule.dateEnd.toString(),
-                                total: row.total,
+                                total: int.parse(row.total),
                                 status: row.status,
                               ));
                             }

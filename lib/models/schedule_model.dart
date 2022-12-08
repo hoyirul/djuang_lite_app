@@ -37,11 +37,11 @@ class ScheduleModel {
     String status;
     DateTime createdAt;
     DateTime updatedAt;
-    int? customerId;
-    int? driverId;
-    int scheduleId;
+    String? customerId;
+    String? driverId;
+    String scheduleId;
     DateTime orderDate;
-    int total;
+    String total;
 
     factory ScheduleModel.fromJson(Map<String, dynamic> json) => ScheduleModel(
         id: json["id"],
