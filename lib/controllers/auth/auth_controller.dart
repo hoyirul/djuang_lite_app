@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
+import 'package:djuang_lite_app/screens/choices/choice_screen.dart';
 import 'package:djuang_lite_app/screens/customers/auth/login_screen.dart';
 import 'package:djuang_lite_app/screens/customers/home/home_screen.dart';
 import 'package:djuang_lite_app/screens/drivers/auth/login_screen.dart';
@@ -119,7 +120,7 @@ class AuthController extends GetxController{
       final response = await http.post(url, headers: HeaderHelper().headersLogged(prefs.getString('token_type'), prefs.getString('access_token')));
       if(response.statusCode == 200){
         prefs.clear();
-        Get.off(const LoginCustomerScreen());
+        Get.off(const ChoiceScreen());
       }else{
         throw jsonDecode(response.body)["errors"] ?? "Unknown Error Occured";
       }

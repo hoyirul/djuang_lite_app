@@ -36,7 +36,7 @@ class _RegisterDriverScreenState extends State<RegisterDriverScreen> {
                   borderRadius: BorderRadius.circular(25),
                   color: Colors.transparent
                 ),
-                child: SvgPicture.asset('assets/svg/auth.svg'),
+                child: SvgPicture.asset('assets/svg/auth_driver.svg'),
               ),
               const SizedBox(height: 25,),
               const Align(
