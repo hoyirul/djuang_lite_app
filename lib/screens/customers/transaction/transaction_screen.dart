@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:djuang_lite_app/controllers/customers/order_controller.dart';
 import 'package:djuang_lite_app/pickers/color_pickers.dart';
 import 'package:djuang_lite_app/pickers/font_pickers.dart';
@@ -117,7 +119,7 @@ class _TransactionCustomerScreenState extends State<TransactionCustomerScreen> {
                                 timeReturn: row.schedule.timeReturn,
                                 start: row.schedule.dateStart.toString(),
                                 end: row.schedule.dateEnd.toString(),
-                                total: int.parse(row.total),
+                                total: double.parse(row.total),
                                 status: row.status,
                               ));
                             }

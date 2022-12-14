@@ -7,7 +7,7 @@ import 'package:intl/intl.dart' as intl;
 
 class DetailTransactionDriverScreen extends StatefulWidget {
   final String txid, customer, driver, pickupAddress, destinationAddress, pickupReturnAddress, timePickup, timeReturn, start, end, status;
-  final int total;
+  final double total;
   const DetailTransactionDriverScreen({super.key, required this.txid, required this.customer, required this.driver, required this.pickupAddress, required this.destinationAddress, required this.pickupReturnAddress, required this.timePickup, required this.timeReturn, required this.start, required this.end, required this.total, required this.status});
 
   @override

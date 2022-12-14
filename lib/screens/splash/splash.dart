@@ -66,7 +66,7 @@ class _SplashScreenState extends State<SplashScreen> {
               padding: const EdgeInsets.only(bottom: 50),
               child: const Align(
                 alignment: Alignment.bottomCenter,
-                child: Text('By Aktifin Aja', style: TextStyle(
+                child: Text('By Mochammad Hairullah', style: TextStyle(
                   fontFamily: FontPicker.medium,
                   color: ColorPicker.white
                 ),),

@@ -60,7 +60,7 @@ class AuthController extends GetxController{
           prefs.setString('token_type', json['data']['token_type']);
           prefs.setString('name', json['data']['user']['name']);
           prefs.setString('email', json['data']['user']['email']);
-          prefs.setString('role_id', json['data']['user']['role_id']);
+          prefs.setInt('role_id', int.parse(json['data']['user']['role_id']));
           prefs.setString('address', json['data']['user']['address'] ?? '');
           prefs.setString('image', json['data']['user']['image'] ?? '');
           prefs.setString('status', json['data']['user']['status'] ?? '');

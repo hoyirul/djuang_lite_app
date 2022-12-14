@@ -1,7 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.djuang_lite_app">
-   <application
-        android:label="djuang_lite_app"
+  <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <application
+        android:label="Djuang App"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
